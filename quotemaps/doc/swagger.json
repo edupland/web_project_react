@@ -1,0 +1,153 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "QuoteMaps",
+    "version" : "1.0.0",
+    "title" : "QuoteMaps"
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/Web_project/QuoteMaps/1.0.0",
+  "tags" : [ {
+    "name" : "User",
+    "description" : "User of web site"
+  } ],
+  "schemes" : [ "https", "http" ],
+  "paths" : {
+    "/user/register" : {
+      "post" : {
+        "tags" : [ "User" ],
+        "summary" : "Create new user",
+        "description" : "Create new user with username and password",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "query",
+          "description" : "username of the user",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "description" : "password of the user",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User create",
+            "schema" : {
+              "$ref" : "#/definitions/inline_response_200"
+            }
+          },
+          "500" : {
+            "description" : "Sign up failed/"
+          }
+        }
+      }
+    },
+    "/user/login" : {
+      "post" : {
+        "tags" : [ "User" ],
+        "summary" : "User log in",
+        "description" : "User log in with username and password",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "User",
+          "description" : "User parameters to log in",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User connected"
+          },
+          "401" : {
+            "description" : "A user is already connected\nUsername doesn't exist\nIncorrect password"
+          }
+        }
+      }
+    },
+    "/user/list" : {
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "List of users",
+        "description" : "Send the list of registered users",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "List of registered users"
+          }
+        }
+      }
+    },
+    "/user/loggedInUser" : {
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "Currently logged",
+        "description" : "Send the currently logged in user",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The current user"
+          }
+        }
+      }
+    },
+    "/user/updateScore" : {
+      "put" : {
+        "tags" : [ "User" ],
+        "summary" : "Update the score of the user after answering a question.",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "query",
+          "description" : "username of the user we want to update the score",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "score",
+          "in" : "query",
+          "description" : "Current score of the user",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Score has been updated."
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "User" : {
+      "type" : "object",
+      "required" : [ "password", "username" ],
+      "properties" : {
+        "username" : {
+          "type" : "string",
+          "example" : "lreveillere"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "lreveillere"
+        }
+      }
+    },
+    "inline_response_200" : {
+      "type" : "object",
+      "required" : [ "password", "score", "username" ],
+      "properties" : {
+        "username" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "score" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
