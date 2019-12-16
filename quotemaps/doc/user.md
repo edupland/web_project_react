@@ -1,6 +1,8 @@
 # Documentation utilisateur
 
-Après avoir lancé les commandes indiquées dans la documentation administrateur, le projet se lance automatiquement sur `http://localhost:3000/`
+Après avoir lancé les commandes indiquées dans la documentation administrateur, le projet se lance automatiquement sur `http://localhost:3000/`</br>
+
+Un utilisateur sans compte peut utiliser l'outil en répondant à des questions mais il ne gagnera pas de point. Pour comptabiliser les points, il faut avoir un compte. Avec ce nombre de points, les différents utilisateurs auront chacun un nombre de points et il y aura un classement pour que les utilisateurs se challengent.
 
 ## Inscription
 
