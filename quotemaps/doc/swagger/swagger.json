@@ -13,15 +13,15 @@
   } ],
   "schemes" : [ "https", "http" ],
   "paths" : {
-    "/user/register" : {
+    "/api/user/register" : {
       "post" : {
         "tags" : [ "User" ],
         "summary" : "Create new user",
-        "description" : "Create new user with username and password",
+        "description" : "Create new user with nickname and password",
         "parameters" : [ {
-          "name" : "username",
+          "name" : "nickname",
           "in" : "query",
-          "description" : "username of the user",
+          "description" : "nickname of the user",
           "required" : true,
           "type" : "string"
         }, {
@@ -38,17 +38,20 @@
               "$ref" : "#/definitions/inline_response_200"
             }
           },
+          "204" : {
+            "description" : "You need to fill both inputs_nThe nickname is already exists"
+          },
           "500" : {
-            "description" : "Sign up failed/"
+            "description" : "An error occured when saving the new user"
           }
         }
       }
     },
-    "/user/login" : {
+    "/api/user/login" : {
       "post" : {
         "tags" : [ "User" ],
         "summary" : "User log in",
-        "description" : "User log in with username and password",
+        "description" : "User log in with nickname and password",
         "parameters" : [ {
           "in" : "body",
           "name" : "User",
@@ -62,13 +65,40 @@
           "200" : {
             "description" : "User connected"
           },
+          "204" : {
+            "description" : "This nickname doesn't exists\nPassword incorrect"
+          },
           "401" : {
-            "description" : "A user is already connected\nUsername doesn't exist\nIncorrect password"
+            "description" : "Someone is already connected"
           }
         }
       }
     },
-    "/user/list" : {
+    "/api/user/logout" : {
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "User to log out",
+        "description" : "User log out from his account",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "User",
+          "description" : "User parameters account",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User log out"
+          },
+          "401" : {
+            "description" : "Tried to log out when not connected"
+          }
+        }
+      }
+    },
+    "/api/user/list" : {
       "get" : {
         "tags" : [ "User" ],
         "summary" : "List of users",
@@ -81,7 +111,7 @@
         }
       }
     },
-    "/user/loggedInUser" : {
+    "/api/user/loggedInUser" : {
       "get" : {
         "tags" : [ "User" ],
         "summary" : "Currently logged",
@@ -94,14 +124,14 @@
         }
       }
     },
-    "/user/updateScore" : {
+    "/api/user/updateScore" : {
       "put" : {
         "tags" : [ "User" ],
         "summary" : "Update the score of the user after answering a question.",
         "parameters" : [ {
-          "name" : "username",
+          "name" : "nickname",
           "in" : "query",
-          "description" : "username of the user we want to update the score",
+          "description" : "nickname of the user we want to update the score",
           "required" : false,
           "type" : "string"
         }, {
@@ -122,9 +152,9 @@
   "definitions" : {
     "User" : {
       "type" : "object",
-      "required" : [ "password", "username" ],
+      "required" : [ "nickname", "password" ],
       "properties" : {
-        "username" : {
+        "nickname" : {
           "type" : "string",
           "example" : "lreveillere"
         },
@@ -136,9 +166,9 @@
     },
     "inline_response_200" : {
       "type" : "object",
-      "required" : [ "password", "score", "username" ],
+      "required" : [ "nickname", "password", "score" ],
       "properties" : {
-        "username" : {
+        "nickname" : {
           "type" : "string"
         },
         "password" : {
