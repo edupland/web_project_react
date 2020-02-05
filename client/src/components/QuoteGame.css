@@ -1,0 +1,28 @@
+.row {
+    margin-bottom: 20px;
+}
+
+.btn-answer {
+    border: none;
+    width: 200px;
+    height: 75px;
+    text-align: center;
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#quote {
+    font-size: 25px;
+    font-style: italic;
+}
+
+#help-msg {
+    font-weight: bold;
+}
+
+#framed {
+    border: solid;
+    border-width: 1px;
+}

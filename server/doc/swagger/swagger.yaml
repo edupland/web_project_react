@@ -1,0 +1,185 @@
+---
+swagger: "2.0"
+info:
+  description: QuoteMaps
+  version: 1.0.0
+  title: QuoteMaps
+host: virtserver.swaggerhub.com
+basePath: /Web_project/QuoteMaps/1.0.0
+tags:
+- name: User
+  description: User of web site
+- name: Score
+  description: the score of a User
+schemes:
+- https
+- http
+paths:
+  /api/user/register:
+    post:
+      tags:
+      - User
+      summary: Create new user
+      description: Create new user with nickname and password
+      parameters:
+      - name: nickname
+        in: query
+        description: nickname of the user
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: password of the user
+        required: true
+        type: string
+      responses:
+        "200":
+          description: User create
+          schema:
+            $ref: '#/definitions/inline_response_200'
+        "204":
+          description: The username is already exists
+        "500":
+          description: |-
+            An error occured when saving the new user
+            An error occured when looking for a user with the same username
+  /api/user/login:
+    post:
+      tags:
+      - User
+      summary: User log in
+      description: User log in with nickname and password
+      parameters:
+      - in: body
+        name: User
+        description: User parameters to log in
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: User connected
+        "204":
+          description: |-
+            This username doesn't exists
+            Password incorrect
+            You need to fill both inputs
+        "500":
+          description: An error occured when searching a user
+  /api/user/logout:
+    get:
+      tags:
+      - User
+      summary: User to log out
+      description: User log out from his account
+      parameters:
+      - in: body
+        name: User
+        description: User parameters account
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: User log out
+  /api/user/loggedInUser:
+    get:
+      tags:
+      - User
+      summary: Currently logged
+      description: Send the currently logged in user
+      parameters: []
+      responses:
+        "200":
+          description: The current user
+        "404":
+          description: Couldn't find the user
+        "500":
+          description: An error occured when looking for a user with the same username
+  /api/score/update:
+    post:
+      tags:
+      - Score
+      summary: Update the score of the currently logged in user
+      parameters:
+      - name: nickname
+        in: query
+        description: nickname of the user we want to update the score
+        required: false
+        type: string
+      - name: score
+        in: query
+        description: Current score of the user
+        required: false
+        type: integer
+      responses:
+        "200":
+          description: Score has been updated
+        "400":
+          description: Bad format of score
+        "500":
+          description: An error occured when updating the score of the user
+  /api/score/rankings:
+    get:
+      tags:
+      - Score
+      summary: Get the players with the best scores
+      parameters:
+      - name: top
+        in: query
+        description: The top scores of players
+        required: false
+        type: integer
+      responses:
+        "200":
+          description: The list of the best players
+        "400":
+          description: Bad format of top
+        "500":
+          description: An error occured when retrieving the rankings
+definitions:
+  User:
+    type: object
+    required:
+    - nickname
+    - password
+    properties:
+      nickname:
+        type: string
+        example: lreveillere
+      password:
+        type: string
+        example: lreveillere
+  Score:
+    type: object
+    required:
+    - score
+    - user
+    properties:
+      user:
+        $ref: '#/definitions/Score_user'
+      score:
+        type: integer
+  inline_response_200:
+    type: object
+    required:
+    - nickname
+    - password
+    - score
+    properties:
+      nickname:
+        type: string
+      password:
+        type: string
+      score:
+        type: integer
+  Score_user:
+    type: object
+    required:
+    - nickname
+    - password
+    properties:
+      nickname:
+        type: string
+      password:
+        type: string

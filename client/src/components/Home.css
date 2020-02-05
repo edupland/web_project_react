@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Ubuntu";
+    src: url('../Ubuntu-Regular.ttf');
+}
+
+.App {
+    font-family: "Ubuntu";
+    text-align: center;
+}
+
+.App-header {
+    background-color: #000000;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.App-intro {
+    padding: 20px;
+    font-size: large;
+}
+
+#App-title {
+    color: green;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.vertical-center {
+    min-height: 80%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.btn-outline-dark {
+    background-color: white;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.big-btn {
+    border: none;
+    padding: 8px 30px;
+    text-align: center;
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.big-btn-outline {
+    background-color: white;
+    border-style: solid;
+    border-width: 5px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 45px;
+    border-radius: 10px;
+}
+
+.btn-rankings {
+    border-style: solid;
+    border-width: 3px;
+    padding: 10px 10px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: capitalize;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.catchphrase {
+    padding-bottom: 20px;
+}
+
+#rules {
+    font-size: 20px;
+}
